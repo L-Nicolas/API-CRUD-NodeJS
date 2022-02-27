@@ -4,7 +4,7 @@ import Rapport from './rapport';
 
 class RapportModel{
 
-    queryCreateRapport = async (rapport: Rapport) => {
+    queryCreateRapport = async (user, imm, rapport: Rapport) => {
         return new Promise((resolve, reject) => {
             pool.getConnection((err, connexion) => {
                 connexion.release();
@@ -14,14 +14,14 @@ class RapportModel{
                 const sql = "INSERT INTO `Rapports` (type_probleme, description, id_user, id_immeuble) VALUES ('" + 
                                                     rapport.type_probleme + "', '" +
                                                     rapport.description + "' , " +
-                                                    rapport.id_user + " , " +
-                                                    rapport.id_immeuble + ");";
+                                                    user.data[0].id + " , " +
+                                                    imm.data[0].id + ");";
                 pool.query(sql, [], (error, results) => {
                     if (error) {
                         return reject({ error: true, message: error, data: [] });
                     }
                     if (results.affectedRows == 1) {
-                        return resolve({ error: false, message: 'Rapport créé', data: results });
+                        return resolve({ error: false, message: 'Rapport créé', data: [] });
                     } 
                     return reject({ error: true, message: "Erreur lors de l'insertion du rapport", data: [] });
                 });
