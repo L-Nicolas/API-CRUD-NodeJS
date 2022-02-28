@@ -36,7 +36,7 @@ class RapportModel{
 
                 if (err) { return reject({ error: true, message: err, data: [] })}
 
-                const sql = "SELECT * FROM rapport WHERE id=? AND etat != HID";
+                const sql = "SELECT * FROM rapport WHERE id=? AND etat != 'HID'";
                 pool.query(sql, id, (error, results) => {
                     if (error) {
                         return reject({ error: true, message: error, data: [] });
@@ -57,7 +57,7 @@ class RapportModel{
 
                 if (err) { return reject({ error: true, message: err, data: [] })}
 
-                const sql = "SELECT * FROM rapports WHERE id_immeuble=? AND etat != HID";
+                const sql = "SELECT * FROM rapports WHERE id_immeuble=? AND etat != 'HID'";
                 pool.query(sql, id, (error, results) => {
                     if (error) {
                         return reject({ error: true, message: error, data: [] });
@@ -100,7 +100,7 @@ class RapportModel{
 
                 if (err) { return reject({ error: true, message: err, data: [] })}
 
-                const sql = "SELECT R.* FROM rapports as R INNER JOIN (SELECT id FROM users WHERE token=?) as U ON  R.id_user = U.id WHERE etat != HID;";
+                const sql = "SELECT R.* FROM rapports as R INNER JOIN (SELECT id FROM users WHERE token=?) as U ON  R.id_user = U.id WHERE etat != 'HID';";
                 pool.query(sql, id, (error, results) => {
                     if (error) {
                         return reject({ error: true, message: error, data: [] });
