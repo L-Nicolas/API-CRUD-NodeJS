@@ -11,8 +11,9 @@ class RapportModel{
 
                 if (err) throw err; // not connected!
 
-                const sql = "INSERT INTO `Rapports` (type_probleme, description, id_user, id_immeuble) VALUES ('" + 
+                const sql = "INSERT INTO `Rapports` (type_probleme, titre, description, id_user, id_immeuble) VALUES ('" + 
                                                     rapport.type_probleme + "', '" +
+                                                    rapport.titre + "' , '" +
                                                     rapport.description + "' , " +
                                                     user.data[0].id + " , " +
                                                     imm.data[0].id + ");";

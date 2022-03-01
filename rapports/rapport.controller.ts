@@ -10,7 +10,7 @@ class RapportCtrl {
         if(Object.keys(req.body).length === 0) {
             return res.status(400).json({ error: true, message: "Bad request", data: [] });
         } else {
-            let dataIpt = ['type_probleme','description','token'];
+            let dataIpt = ['type_probleme','titre','description','token'];
             let listError: any[] = [];
             //vérification que le body est correctement rempli
             dataIpt.forEach((val) => {
@@ -38,7 +38,8 @@ class RapportCtrl {
             }
     
             let rapport = new Rapport(req.body.type_probleme,
-                                    req.body.description
+                req.body.titre,
+                req.body.description
                                     );
     
             /* let rapportQuery = new RapportModel().queryCreateRapport(rapport);
