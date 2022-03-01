@@ -9,7 +9,7 @@ class UserModel{
 
                 if (err) throw err; // not connected!
 
-                const sql = "SELECT * FROM Users WHERE token=? AND etat='VAL'";
+                const sql = "SELECT * FROM infosUser WHERE id=(SELECT id FROM users WHERE token=?) AND etat='VAL'";
                 pool.query(sql, array, (error, results) => {
                     if (error) {
                         return reject({ error: true, message: error, data: [] });
